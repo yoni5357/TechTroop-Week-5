@@ -11,6 +11,8 @@ const store = [
     { name: "picture frame", inventory: 31, price: 70 }
 ]
 
+app.use(express.static(path.join(__dirname, 'dist')));
+
 app.listen(port, () => {
     console.log(`server running on port ${port}`);
 })
@@ -19,10 +21,12 @@ app.get('/', (req,res) => {
     res.send("Server is up and running smoothly");
 })
 
+
 app.get('/priceCheck/:itemName', (req,res) => {
     const item = store.find(item => item.name === req.params.itemName)
     if(!item){
-        res.send("item does'nt exist")
+        res.status(400);
+        res.send({error:"item does'nt exist"});
     }
     else res.send({"price":item.price});
 })
