@@ -22,6 +22,13 @@ async function checkPriceBeforeBuy(){
     }
 }
 
+async function chairPriceCheck(){
+    const res = await fetch(`http://localhost:3000/priceCheck/chair`);
+    const priceObj = await res.json();
+    const price = priceObj.price;
+    return price;
+}
+
 async function buyItem(){
     const itemName = document.getElementById('buy-item-input').value;
     const price = await checkPriceBeforeBuy()
@@ -39,7 +46,24 @@ async function buyItem(){
     document.getElementById('buy-display').innerHTML = `Congratulations, you've just bought ${item.name} for ${item.price}. There are ${item.inventory} left now in the store.`
 }
 
+async function buyChairInIntervals(){
+    let chairPrice = await chairPriceCheck();
+
+    setInterval(async () => {
+        let currentPrice = await chairPriceCheck();
+        if(currentPrice < chairPrice){
+            await fetch(`http://localhost:3000/buy/chair`);
+            console.log('bought chair for less');
+            money -= currentPrice;
+            document.getElementById('money').innerHTML = money;
+            chairPrice = currentPrice;
+        }
+        console.log('still waiting for a price drop...');
+    },3000)
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    buyChairInIntervals();
     document.getElementById('money').innerHTML = money;
     document.getElementById('price-button').addEventListener('click',checkPrice);
     document.getElementById('buy-button').addEventListener('click', buyItem);

@@ -46,15 +46,11 @@ app.get('/buy/:name', (req,res) => {
 app.get('/sale', (req,res) => {
     let query = req.query;
     if(query.admin === "true"){
-        let saleStore = store.map((item) => {
-            let newItem = {...item};
-            if(newItem.inventory > 10){
-                newItem.price /= 2;
-            }
-            return newItem;
-        })
+        for(let item of store){
+            item.price /= 2;
+        }
         console.log("admin");
-        res.send(saleStore);
+        res.send(store);
     }
     else{
         res.send(store);
