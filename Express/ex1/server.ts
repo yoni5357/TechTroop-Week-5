@@ -30,3 +30,15 @@ app.get('/priceCheck/:itemName', (req,res) => {
     }
     else res.send({"price":item.price});
 })
+
+app.get('/buy/:name', (req,res) => {
+    const item = store.find(item => item.name === req.params.name)
+    if(item){
+        res.status(200);
+        item.inventory -= 1;
+        res.send(item);
+    } else{
+        res.status(400);
+        res.send({error:"item does'nt exist"});
+    }
+})
