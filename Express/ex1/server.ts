@@ -42,3 +42,21 @@ app.get('/buy/:name', (req,res) => {
         res.send({error:"item does'nt exist"});
     }
 })
+
+app.get('/sale', (req,res) => {
+    let query = req.query;
+    if(query.admin === "true"){
+        let saleStore = store.map((item) => {
+            let newItem = {...item};
+            if(newItem.inventory > 10){
+                newItem.price /= 2;
+            }
+            return newItem;
+        })
+        console.log("admin");
+        res.send(saleStore);
+    }
+    else{
+        res.send(store);
+    }
+})
