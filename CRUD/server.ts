@@ -18,6 +18,16 @@ server.get("/:word", (req,res) => {
     } else res.send({count:0});
 })
 
+//Ex3
+server.post("/:word", (req,res) => {
+    const word = req.params.word;
+    if(wordCounter[word]){
+        wordCounter[word] += 1
+    } else wordCounter[word] = 1;
+    res.status(201);
+    res.send(wordCounter);
+})
+
 server.listen(port, () => {
     console.log("Server running on port " + port);
 })
