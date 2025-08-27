@@ -1,5 +1,11 @@
 const postObject = {};
 
+type CommentBody = {
+    name:string
+    email:string
+    body:string
+}
+
 
 async function fetchAllPosts(){
     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -27,7 +33,7 @@ async function getPosts(){
         postObject[post.id]["comments"] = [];
         for(let comment of comments){
             if(comment.postId === post.id){
-                postObject[post.id]["comments"].push(comment.body);
+                postObject[post.id]["comments"].push(comment);
             }
         }
     }
@@ -41,5 +47,13 @@ function getPostComments(id:string){
     return postObject[id]["comments"];
 }
 
+function updateComment(postId:string, commentId:string, body:CommentBody){
+    const postComments = postObject[postId]["comments"];
+    const comment = postComments.find(c => c.id = commentId);
+    comment.name = body.name;
+    comment.email = body.email;
+    comment.body = body.body;
+}
 
-export default {getPosts, getPostById, getPostComments};
+
+export default {getPosts, getPostById, getPostComments, updateComment};

@@ -15,4 +15,12 @@ function getPostComments(req,res){
     res.status(200).json(comments);
 }
 
-export default {getPosts, getPostById, getPostComments}
+function updateComment(req,res){
+    const postId = req.params.postId;
+    const commentId = req.params.commentId;
+    const body = req.body;
+    postsModel.updateComment(postId, commentId, body);
+    res.status(200).json(postsModel.getPostById(postId)["comments"]);
+}
+
+export default {getPosts, getPostById, getPostComments, updateComment}
