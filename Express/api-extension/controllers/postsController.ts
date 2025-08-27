@@ -33,4 +33,11 @@ function deletePostById(req,res){
     res.sendStatus(204);
 }
 
-export default {getPosts, getPostById, getPostComments, updateComment, addPost, deletePostById}
+function deleteCommentById(req,res){
+    postsModel.deleteCommentById(req.params.postId,req.params.commentId);
+    res.sendStatus(204);
+}
+
+
+
+export default {getPosts, getPostById, getPostComments, updateComment, addPost, deletePostById, deleteCommentById}

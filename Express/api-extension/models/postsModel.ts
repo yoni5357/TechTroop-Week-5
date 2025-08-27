@@ -70,4 +70,14 @@ function deletePostById(postId:string){
     console.log(postObject);
 }
 
-export default {getPosts, getPostById, getPostComments, updateComment, addPost, deletePostById};
+function deleteCommentById(postId:string, commentId:string){
+    const post = postObject[postId];
+    const comments = post["comments"];
+    console.log(comments);
+    const commentToDelet = comments.find(c=>c.id == commentId);
+    const commentIndex = comments.indexOf(commentToDelet);
+    comments.splice(commentIndex,1);
+    console.log(comments);
+}
+
+export default {getPosts, getPostById, getPostComments, updateComment, addPost, deletePostById, deleteCommentById};
