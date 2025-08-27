@@ -34,9 +34,12 @@ async function getPosts(){
 }
 
 function getPostById(id:string){
-    console.log(postObject[id]);
     return postObject[id];
 }
 
+function getPostComments(id:string){
+    return postObject[id]["comments"];
+}
 
-export default {getPosts, getPostById};
+
+export default {getPosts, getPostById, getPostComments};

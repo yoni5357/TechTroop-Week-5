@@ -10,4 +10,9 @@ function getPostById(req,res){
     res.status(200).json(post);
 }
 
-export default {getPosts, getPostById}
+function getPostComments(req,res){
+    const comments = postsModel.getPostComments(req.params.id);
+    res.status(200).json(comments);
+}
+
+export default {getPosts, getPostById, getPostComments}
