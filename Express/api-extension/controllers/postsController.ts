@@ -23,4 +23,9 @@ function updateComment(req,res){
     res.status(200).json(postsModel.getPostById(postId)["comments"]);
 }
 
-export default {getPosts, getPostById, getPostComments, updateComment}
+function addPost(req,res){
+    postsModel.addPost(req.body);
+    res.sendStatus(201)
+}
+
+export default {getPosts, getPostById, getPostComments, updateComment, addPost}

@@ -1,8 +1,14 @@
 const postObject = {};
 
-type CommentBody = {
+type commentBody = {
     name:string
     email:string
+    body:string
+}
+
+type postBody = {
+    userId:string,
+    title:string,
     body:string
 }
 
@@ -47,7 +53,7 @@ function getPostComments(id:string){
     return postObject[id]["comments"];
 }
 
-function updateComment(postId:string, commentId:string, body:CommentBody){
+function updateComment(postId:string, commentId:string, body:commentBody){
     const postComments = postObject[postId]["comments"];
     const comment = postComments.find(c => c.id = commentId);
     comment.name = body.name;
@@ -55,5 +61,13 @@ function updateComment(postId:string, commentId:string, body:CommentBody){
     comment.body = body.body;
 }
 
+function addPost(body:postBody){
+    console.log(Object.keys(postObject).length);
+    postObject[Object.keys(postObject).length + 1] = body;
+    console.log(postObject[Object.keys(postObject).length]);
+    console.log(Object.keys(postObject).length);
 
-export default {getPosts, getPostById, getPostComments, updateComment};
+}
+
+
+export default {getPosts, getPostById, getPostComments, updateComment, addPost};
