@@ -31,8 +31,12 @@ async function getPosts(){
             }
         }
     }
-    console.log(postObject);
+}
+
+function getPostById(id:string){
+    console.log(postObject[id]);
+    return postObject[id];
 }
 
 
-export default {getPosts}
+export default {getPosts, getPostById};

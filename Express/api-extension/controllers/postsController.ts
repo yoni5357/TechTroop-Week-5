@@ -5,4 +5,9 @@ export async function getPosts(req,res){
     res.status(200).json(posts);
 }
 
-export default {getPosts}
+function getPostById(req,res){
+    const post = postsModel.getPostById(req.params.id);
+    res.status(200).json(post);
+}
+
+export default {getPosts, getPostById}
