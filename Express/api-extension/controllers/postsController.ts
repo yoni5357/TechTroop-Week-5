@@ -25,7 +25,12 @@ function updateComment(req,res){
 
 function addPost(req,res){
     postsModel.addPost(req.body);
-    res.sendStatus(201)
+    res.sendStatus(201);
 }
 
-export default {getPosts, getPostById, getPostComments, updateComment, addPost}
+function deletePostById(req,res){
+    postsModel.deletePostById(req.params.id);
+    res.sendStatus(204);
+}
+
+export default {getPosts, getPostById, getPostComments, updateComment, addPost, deletePostById}

@@ -62,12 +62,12 @@ function updateComment(postId:string, commentId:string, body:commentBody){
 }
 
 function addPost(body:postBody){
-    console.log(Object.keys(postObject).length);
     postObject[Object.keys(postObject).length + 1] = body;
-    console.log(postObject[Object.keys(postObject).length]);
-    console.log(Object.keys(postObject).length);
-
 }
 
+function deletePostById(postId:string){
+    delete postObject[postId];
+    console.log(postObject);
+}
 
-export default {getPosts, getPostById, getPostComments, updateComment, addPost};
+export default {getPosts, getPostById, getPostComments, updateComment, addPost, deletePostById};

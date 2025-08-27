@@ -6,5 +6,6 @@ router.get("/:id", postsController.getPostById);
 router.get("/:id/comments", postsController.getPostComments);
 router.put("/:postId/comments/:commentId", postsController.updateComment);
 router.post("/", postsController.addPost );
+router.delete("/:id", postsController.deletePostById);
 
 export default router
