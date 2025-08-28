@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import {ValidationError,NotFoundError,BaseError} from "./errors"
-import usersModel from "./usersModel";
+import usersModel from "./models/usersModel";
 
 function logger(req:Request,res:Response,next:NextFunction){
     const date = new Date().toDateString();
