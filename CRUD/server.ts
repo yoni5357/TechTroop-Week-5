@@ -28,6 +28,20 @@ server.post("/:word", (req,res) => {
     res.send(wordCounter);
 })
 
+//Ex5
+server.delete("/:word", (req, res) => {
+    const word = req.params.word;
+    const wordToDelete = Object.keys(wordCounter).find(key => key === word);
+    if(wordToDelete){
+        delete wordCounter[word]
+        res.status(204);
+        res.send("word has been deleted");
+    } else {
+        res.status(400);
+        res.send("no such word in counter");
+    }
+})
+
 server.listen(port, () => {
     console.log("Server running on port " + port);
 })
